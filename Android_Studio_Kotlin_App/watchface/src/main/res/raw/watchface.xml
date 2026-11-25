@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450">
+    <UserConfigurations>
+        <ColorConfiguration id="theme_color" displayName="theme_color_name" defaultValue="0">
+            <!-- Vivid AMOLED Neon Palette: 0=MoltenOrange 1=BioEmerald 2=ElectricCyan 3=PulseRed -->
+            <ColorOption id="0" displayName="theme_sport" colors="#ffff6b00 #ff14f195 #ff00e5ff #ffff3b5c" />
+            <ColorOption id="1" displayName="theme_arctic" colors="#ff38d6ff #fff8fafc #ff00e5ff #ff38d6ff" />
+            <ColorOption id="2" displayName="theme_minimal" colors="#ffffffff #ffb4c4d8 #ff00e5ff #ffe2e8f0" />
+        </ColorConfiguration>
+    </UserConfigurations>
+
+    <Scene backgroundColor="#ff05070b">
+        <!-- 1. SUBTLE DARK OUTER TRACK ARCS -->
+        <PartDraw x="16" y="16" width="418" height="418">
+            <Variant mode="AMBIENT" target="alpha" value="35" />
+            <Arc centerX="209" centerY="209" width="402" height="402" startAngle="218" endAngle="316">
+                <Stroke color="#ff151e2c" thickness="10" cap="ROUND" />
+            </Arc>
+            <Arc centerX="209" centerY="209" width="402" height="402" startAngle="44" endAngle="142">
+                <Stroke color="#ff151e2c" thickness="10" cap="ROUND" />
+            </Arc>
+            <Arc centerX="209" centerY="209" width="402" height="402" startAngle="158" endAngle="202">
+                <Stroke color="#ff151e2c" thickness="9" cap="ROUND" />
+            </Arc>
+        </PartDraw>
+
+        <!-- 2. SLOT 1: LEFT 4-LAYER NEON ARC = SÄTZE -->
+        <ComplicationSlot x="16" y="16" width="418" height="418" slotId="1"
+            name="slot_sets" displayName="slot_sets_name"
+            isCustomizable="true" supportedTypes="RANGED_VALUE SHORT_TEXT">
+            <BoundingArc centerX="209" centerY="209" width="402" height="402" thickness="26"
+                startAngle="218" endAngle="316" isClockwise="true" />
+            <DefaultProviderPolicy
+                primaryProvider="eu.remk.coaching.wear/eu.remk.coaching.wear.RemkSetsComplicationService"
+                primaryProviderType="RANGED_VALUE"
+                defaultSystemProvider="STEP_COUNT"
+                defaultSystemProviderType="RANGED_VALUE" />
+            <Complication type="RANGED_VALUE">
+                <PartDraw x="0" y="0" width="418" height="418" alpha="55">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="218" endAngle="316">
+                        <Transform target="endAngle" value="218 + 98 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.16, 1)" />
+                        <Stroke color="[CONFIGURATION.theme_color.0]" thickness="26" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="418" height="418" alpha="120">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="218" endAngle="316">
+                        <Transform target="endAngle" value="218 + 98 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.16, 1)" />
+                        <Stroke color="[CONFIGURATION.theme_color.0]" thickness="17" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="418" height="418">
+                    <Variant mode="AMBIENT" target="alpha" value="105" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="218" endAngle="316">
+                        <Transform target="endAngle" value="218 + 98 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.16, 1)" />
+                        <Stroke color="[CONFIGURATION.theme_color.0]" thickness="10" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="418" height="418" alpha="175">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="218" endAngle="316">
+                        <Transform target="endAngle" value="218 + 98 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.16, 1)" />
+                        <Stroke color="#ffffffff" thickness="3" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <PartDraw x="0" y="0" width="418" height="418">
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="218" endAngle="294">
+                        <Stroke color="[CONFIGURATION.theme_color.0]" thickness="10" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- 3. SLOT 2: RIGHT 4-LAYER NEON ARC = KCAL -->
+        <ComplicationSlot x="16" y="16" width="418" height="418" slotId="2"
+            name="slot_kcal" displayName="slot_kcal_name"
+            isCustomizable="true" supportedTypes="RANGED_VALUE SHORT_TEXT">
+            <BoundingArc centerX="209" centerY="209" width="402" height="402" thickness="26"
+                startAngle="44" endAngle="142" isClockwise="true" />
+            <DefaultProviderPolicy
+                primaryProvider="eu.remk.coaching.wear/eu.remk.coaching.wear.RemkKcalComplicationService"
+                primaryProviderType="RANGED_VALUE"
+                defaultSystemProvider="WATCH_BATTERY"
+                defaultSystemProviderType="RANGED_VALUE" />
+            <Complication type="RANGED_VALUE">
+                <PartDraw x="0" y="0" width="418" height="418" alpha="55">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="44" endAngle="142">
+                        <Transform target="endAngle" value="44 + 98 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.16, 1)" />
+                        <Stroke color="[CONFIGURATION.theme_color.1]" thickness="26" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="418" height="418" alpha="120">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="44" endAngle="142">
+                        <Transform target="endAngle" value="44 + 98 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.16, 1)" />
+                        <Stroke color="[CONFIGURATION.theme_color.1]" thickness="17" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="418" height="418">
+                    <Variant mode="AMBIENT" target="alpha" value="105" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="44" endAngle="142">
+                        <Transform target="endAngle" value="44 + 98 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.16, 1)" />
+                        <Stroke color="[CONFIGURATION.theme_color.1]" thickness="10" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="418" height="418" alpha="175">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="44" endAngle="142">
+                        <Transform target="endAngle" value="44 + 98 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.16, 1)" />
+                        <Stroke color="#ffffffff" thickness="3" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <PartDraw x="0" y="0" width="418" height="418">
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="44" endAngle="120">
+                        <Stroke color="[CONFIGURATION.theme_color.1]" thickness="10" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- 4. SLOT 3: BOTTOM 4-LAYER NEON ARC = WASSER + LIVE LABEL -->
+        <ComplicationSlot x="16" y="16" width="418" height="418" slotId="3"
+            name="slot_water" displayName="slot_water_name"
+            isCustomizable="true" supportedTypes="RANGED_VALUE SHORT_TEXT">
+            <BoundingArc centerX="209" centerY="209" width="402" height="402" thickness="26"
+                startAngle="158" endAngle="202" isClockwise="true" />
+            <DefaultProviderPolicy
+                primaryProvider="eu.remk.coaching.wear/eu.remk.coaching.wear.RemkWaterComplicationService"
+                primaryProviderType="RANGED_VALUE"
+                defaultSystemProvider="WATCH_BATTERY"
+                defaultSystemProviderType="RANGED_VALUE" />
+            <Complication type="RANGED_VALUE">
+                <PartDraw x="0" y="0" width="418" height="418" alpha="55">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="158" endAngle="202">
+                        <Transform target="endAngle" value="158 + 44 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.18, 1)" />
+                        <Stroke color="[CONFIGURATION.theme_color.2]" thickness="25" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="418" height="418" alpha="120">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="158" endAngle="202">
+                        <Transform target="endAngle" value="158 + 44 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.18, 1)" />
+                        <Stroke color="[CONFIGURATION.theme_color.2]" thickness="16" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="418" height="418">
+                    <Variant mode="AMBIENT" target="alpha" value="105" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="158" endAngle="202">
+                        <Transform target="endAngle" value="158 + 44 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.18, 1)" />
+                        <Stroke color="[CONFIGURATION.theme_color.2]" thickness="9" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartDraw x="0" y="0" width="418" height="418" alpha="175">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="158" endAngle="202">
+                        <Transform target="endAngle" value="158 + 44 * clamp(([COMPLICATION.RANGED_VALUE_VALUE] - [COMPLICATION.RANGED_VALUE_MIN]) / max(1, [COMPLICATION.RANGED_VALUE_MAX] - [COMPLICATION.RANGED_VALUE_MIN]), 0.18, 1)" />
+                        <Stroke color="#ffffffff" thickness="3" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartText x="129" y="338" width="160" height="28">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Text align="CENTER">
+                        <Font family="SYNC_TO_DEVICE" size="18" weight="BOLD" color="[CONFIGURATION.theme_color.2]">
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="SHORT_TEXT">
+                <PartDraw x="0" y="0" width="418" height="418">
+                    <Arc centerX="209" centerY="209" width="402" height="402" startAngle="158" endAngle="196">
+                        <Stroke color="[CONFIGURATION.theme_color.2]" thickness="9" cap="ROUND" />
+                    </Arc>
+                </PartDraw>
+                <PartText x="129" y="338" width="160" height="28">
+                    <Variant mode="AMBIENT" target="alpha" value="0" />
+                    <Text align="CENTER">
+                        <Font family="SYNC_TO_DEVICE" size="18" weight="BOLD" color="[CONFIGURATION.theme_color.2]">
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- 5. SMOKED-SAPPHIRE GLASS CHASSIS PNG -->
+        <PartImage x="0" y="0" width="450" height="450">
+            <Variant mode="AMBIENT" target="alpha" value="65" />
+            <Image resource="dial_chassis_hyper" />
+        </PartImage>
+
+        <!-- 6. INNER RIM LABELS -->
+        <PartText x="26" y="218" width="58" height="22" angle="90" pivotX="0.5" pivotY="0.5">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="12" weight="BOLD" color="[CONFIGURATION.theme_color.0]">SÄTZE</Font>
+            </Text>
+        </PartText>
+        <PartText x="366" y="218" width="58" height="22" angle="-90" pivotX="0.5" pivotY="0.5">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="12" weight="BOLD" color="[CONFIGURATION.theme_color.1]">KCAL</Font>
+            </Text>
+        </PartText>
+
+        <!-- 7. BATTERY + SLOT 4 (LV. 24 • A-RANG) -->
+        <PartText x="175" y="48" width="100" height="22">
+            <Variant mode="AMBIENT" target="alpha" value="120" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="14" weight="BOLD" color="#ffb0c4de">
+                    <Template>%s%%<Parameter expression="[BATTERY_PERCENT]" /></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <ComplicationSlot x="138" y="74" width="174" height="30" slotId="4"
+            name="slot_rank" displayName="slot_rank_name"
+            isCustomizable="true" supportedTypes="SHORT_TEXT">
+            <BoundingRoundBox x="0" y="0" width="174" height="30" cornerRadius="15" />
+            <DefaultProviderPolicy
+                primaryProvider="eu.remk.coaching.wear/eu.remk.coaching.wear.RemkRankFullComplicationService"
+                primaryProviderType="SHORT_TEXT"
+                defaultSystemProvider="WATCH_BATTERY"
+                defaultSystemProviderType="SHORT_TEXT" />
+            <Complication type="SHORT_TEXT">
+                <PartText x="0" y="3" width="174" height="24">
+                    <Variant mode="AMBIENT" target="alpha" value="150" />
+                    <Text align="CENTER">
+                        <Font family="SYNC_TO_DEVICE" size="15" weight="BOLD" color="[CONFIGURATION.theme_color.2]">
+                            <Template>%s<Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- DATE -->
+        <PartText x="105" y="114" width="240" height="26">
+            <Variant mode="AMBIENT" target="alpha" value="150" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="18" weight="BOLD" color="#ffb8c8dc">
+                    <Template>%s • %s. %s<Parameter expression="[DAY_OF_WEEK_S]" /><Parameter expression="[DAY_Z]" /><Parameter expression="[MONTH_S]" /></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- 8. MONUMENTAL SPLIT CLOCK + 3-LAYER GLOWING LIGHT-BLADE WITH WHITE-HOT CORE -->
+        <PartText x="42" y="148" width="168" height="106">
+            <Text align="END">
+                <Font family="SYNC_TO_DEVICE" size="92" weight="BOLD" color="#ffffffff">
+                    <Template>%s<Parameter expression="[HOUR_0_23_Z]" /></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <PartDraw x="213" y="156" width="24" height="90" alpha="50">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <RoundRectangle x="0" y="0" width="24" height="90" cornerRadiusX="12" cornerRadiusY="12">
+                <Fill color="[CONFIGURATION.theme_color.0]" />
+            </RoundRectangle>
+        </PartDraw>
+        <PartDraw x="218" y="160" width="14" height="82" alpha="110">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <RoundRectangle x="0" y="0" width="14" height="82" cornerRadiusX="7" cornerRadiusY="7">
+                <Fill color="[CONFIGURATION.theme_color.0]" />
+            </RoundRectangle>
+        </PartDraw>
+        <PartDraw x="222" y="164" width="6" height="74">
+            <Variant mode="AMBIENT" target="alpha" value="150" />
+            <RoundRectangle x="0" y="0" width="6" height="74" cornerRadiusX="3" cornerRadiusY="3">
+                <Fill color="[CONFIGURATION.theme_color.0]" />
+            </RoundRectangle>
+        </PartDraw>
+        <PartDraw x="224" y="168" width="2" height="66" alpha="210">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <RoundRectangle x="0" y="0" width="2" height="66" cornerRadiusX="1" cornerRadiusY="1">
+                <Fill color="#ffffffff" />
+            </RoundRectangle>
+        </PartDraw>
+
+        <PartText x="236" y="148" width="128" height="106">
+            <Text align="START">
+                <Font family="SYNC_TO_DEVICE" size="92" weight="BOLD" color="[CONFIGURATION.theme_color.0]">
+                    <Template>%s<Parameter expression="[MINUTE_Z]" /></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <PartText x="348" y="206" width="42" height="28">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Text align="START">
+                <Font family="SYNC_TO_DEVICE" size="20" weight="BOLD" color="#ffb0c4de">
+                    <Template>%s<Parameter expression="[SECOND_Z]" /></Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- 9. LOWER TELEMETRY CAPSULE DATA -->
+        <PartText x="134" y="280" width="84" height="28">
+            <Variant mode="AMBIENT" target="alpha" value="120" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="22" weight="BOLD" color="#ffffffff">
+                    <Template>%s<Parameter expression="[HEART_RATE]" /></Template>
+                </Font>
+            </Text>
+        </PartText>
+        <PartText x="134" y="305" width="84" height="18">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Text align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="12" weight="BOLD" color="#ff94a3b8">BPM</Font>
+            </Text>
+        </PartText>
+        <PartDraw x="148" y="324" width="7" height="7">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Ellipse x="0" y="0" width="7" height="7"><Fill color="[CONFIGURATION.theme_color.1]" /></Ellipse>
+        </PartDraw>
+        <PartDraw x="160" y="324" width="7" height="7">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Transform target="alpha" value="clamp(([HEART_RATE] - 99) * 255, 55, 255)" />
+            <Ellipse x="0" y="0" width="7" height="7"><Fill color="[CONFIGURATION.theme_color.2]" /></Ellipse>
+        </PartDraw>
+        <PartDraw x="172" y="324" width="7" height="7">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Transform target="alpha" value="clamp(([HEART_RATE] - 124) * 255, 55, 255)" />
+            <Ellipse x="0" y="0" width="7" height="7"><Fill color="[CONFIGURATION.theme_color.0]" /></Ellipse>
+        </PartDraw>
+        <PartDraw x="184" y="324" width="7" height="7">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Transform target="alpha" value="clamp(([HEART_RATE] - 144) * 255, 55, 255)" />
+            <Ellipse x="0" y="0" width="7" height="7"><Fill color="[CONFIGURATION.theme_color.3]" /></Ellipse>
+        </PartDraw>
+        <PartDraw x="196" y="324" width="7" height="7">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Transform target="alpha" value="clamp(([HEART_RATE] - 164) * 255, 55, 255)" />
+            <Ellipse x="0" y="0" width="7" height="7"><Fill color="#ffc06eff" /></Ellipse>
+        </PartDraw>
+
+        <ComplicationSlot x="228" y="276" width="140" height="58" slotId="5"
+            name="slot_workout" displayName="slot_workout_name"
+            isCustomizable="true" supportedTypes="SHORT_TEXT">
+            <BoundingRoundBox x="0" y="0" width="140" height="58" cornerRadius="16" />
+            <DefaultProviderPolicy
+                primaryProvider="eu.remk.coaching.wear/eu.remk.coaching.wear.RemkActiveSetComplicationService"
+                primaryProviderType="SHORT_TEXT"
+                defaultSystemProvider="DATE"
+                defaultSystemProviderType="SHORT_TEXT" />
+            <Complication type="SHORT_TEXT">
+                <PartText x="0" y="28" width="140" height="24">
+                    <Variant mode="AMBIENT" target="alpha" value="130" />
+                    <Text align="CENTER">
+                        <Font family="SYNC_TO_DEVICE" size="16" weight="BOLD" color="#fff0f6ff">
+                            <Template>%s • %s<Parameter expression="[COMPLICATION.TITLE]" /><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- 10. TOP-MOST DOMED SAPPHIRE CRYSTAL GLASS LAYER (HIDDEN IN AOD!) -->
+        <PartImage x="0" y="0" width="450" height="450">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <Image resource="sapphire_glass_overlay" />
+        </PartImage>
+    </Scene>
+</WatchFace>
